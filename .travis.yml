@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 14
+  - 14  # Use Node.js 14 or newer for better compatibility
 cache: npm
 
 services:
@@ -8,14 +8,13 @@ services:
 
 before_install:
   - docker --version  # Check Docker version for debugging
-  - npm install -g npm@6.9.0
+  - npm install -g npm@latest  # Ensure npm is updated to the latest version
 
 install:
-  - npm install
-  - npm install react-script@latest
+  - npm install  # Install project dependencies
 
 script:
-  - npm run build               # Build the application
+  - npm run build  # Build the application
 
 after_success:
   # Report test coverage to Codecov
@@ -25,14 +24,14 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
   # Build Docker image using the Dockerfile
-  - docker build -t your_dockerhub_username/your_app_name:$TRAVIS_COMMIT .
+  - docker build -t yineng2002/react-app:$TRAVIS_COMMIT .
   
   # Push Docker image to Docker Hub
-  - docker push your_dockerhub_username/your_app_name:$TRAVIS_COMMIT
+  - docker push yineng2002/react-app:$TRAVIS_COMMIT
 
-after_failure:
-  - cat /home/travis/.npm/_logs/*-debug.log
-
+  # Optional: Run the Docker container (for testing purposes)
+  - docker run -p 3000:3000 yineng2002/react-app:$TRAVIS_COMMIT
+  
 after_script:
   # Report to Coveralls
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
@@ -40,7 +39,7 @@ after_script:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN ${{ secrets.GITHUB_TOKEN }}
+  github-token: $GITHUB_TOKEN  # Use the correct environment variable here
   local_dir: build
   on:
     branch: master
