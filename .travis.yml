@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 10.15.3
+  - 14
 cache: npm
 
 services:
@@ -32,7 +32,7 @@ after_success:
 
 after_failure:
   - cat /home/travis/.npm/_logs/*-debug.log
-  
+
 after_script:
   # Report to Coveralls
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
