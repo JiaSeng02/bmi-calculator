@@ -10,8 +10,8 @@ before_install:
   - docker --version  # Check Docker version for debugging
   - npm install -g npm@latest  # Ensure npm is updated to the latest version
 
-install:
-  - npm install  # Install project dependencies
+#install:
+ # - npm install  # Install project dependencies
 
 script:
   - npm run build  # Build the application
