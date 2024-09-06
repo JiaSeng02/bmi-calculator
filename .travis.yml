@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 14  # Use Node.js 14 or newer for better compatibility
+  - 10.15.3
 cache: npm
 
 services:
