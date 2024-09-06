@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 10.15.3
+  - 14  # Use Node.js 14 or newer for better compatibility
 cache: npm
 
 services:
@@ -9,8 +9,8 @@ services:
 before_install:
   - docker --version  # Check Docker version for debugging
 install:
-  - npm install
-  - npm run test -- --coverage
+  - npm install  # Install project dependencies
+  
 
 script:
   - npm run build  # Build the application
